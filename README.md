@@ -15,29 +15,27 @@
 ### Association
 
 - has_many :items
-- has_many :addresses
 - has_many :buyers
 
 
 
 ## items テーブル
 
-| Column        | Type      | Options                      |
-| ------------- | --------- | ---------------------------- |
-| product       | string    | null: false                  |
-| explanation   | text      | null: false                  |
-| category      | integer   | null: false                  |
-| condition     | integer   | null: false                  |
-| delivery-fee  | integer   | null: false                  |
-| delivery_area | integer   | null: false                  |
-| delivery_days | integer   | null: false                  |
-| price         | integer   | null: false                  |
-| user          | references|null: false, foreign_key: true|
+| Column           | Type      | Options                      |
+| ---------------- | --------- | ---------------------------- |
+| product          | string    | null: false                  |
+| explanation      | text      | null: false                  |
+| category_id      | integer   | null: false                  |
+| condition_id     | integer   | null: false                  |
+| delivery_fee_id  | integer   | null: false                  |
+| delivery_area_id | integer   | null: false                  |
+| delivery_days_id | integer   | null: false                  |
+| price            | integer   | null: false                  |
+| user             | references|null: false, foreign_key: true|
 
 ### Association
 
 - has_one :buyer
-- has_one :addresses
 - belongs_to :user
 
 ## addresses テーブル
@@ -53,8 +51,6 @@
 
 ### Association
 
-- belongs_to :items
-- belongs_to :user
 - belongs_to :buyer
 
 ## buyers テーブル
