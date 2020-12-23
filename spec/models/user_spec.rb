@@ -63,15 +63,67 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe '新規登録/本人情報確認' do
-  #   # - ユーザー本名は、名字と名前がそれぞれ必須であること
-  #   # - ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須であること
-  #   # - ユーザー本名のフリガナは、名字と名前でそれぞれ必須であること
-  #   # - ユーザー本名のフリガナは、全角（カタカナ）での入力が必須であること
-  #   # - 生年月日が必須であること
-  # end
+  describe '新規登録/本人情報確認' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
 
-    # ## トップページ
+    it "ユーザー本名は、名字が必須であること" do
+      @user.family_name = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name can't be blank")
+    end
+
+    it "ユーザー本名は名前が必要であること" do
+      @user.first_name = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+
+    it "ユーザー本名の名字、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
+      @user.family_name = "abc"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid")
+    end
+
+    it "ユーザー本名の名前、全角（漢字・ひらがな・カタカナ）での入力が必須であること" do
+      @user.first_name = "abc"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end
+
+    it "ユーザー本名のフリガナは、名字が必須であること" do
+      @user.family_name_kana = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana can't be blank")
+    end
+
+    it "ユーザー本名のフリガナは、名前が必須であること" do
+      @user.first_name_kana = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana can't be blank")
+    end
+
+    it "ユーザー本名の名字のフリガナは、全角（カタカナ）での入力が必須であること" do
+      @user.family_name_kana = "山田"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana is invalid")
+    end
+
+    it "ユーザー本名の名前のフリガナは、全角（カタカナ）での入力が必須であること" do
+      @user.first_name_kana = "太郎"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+    end
+  
+    it "生年月日が必須であること" do
+      @user.birthday = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday can't be blank")
+    end
+   end
+
+    
     # - ログアウト状態では、ヘッダーに新規登録/ログインボタンが表示されること
     # - ログイン状態では、ヘッダーにユーザーのニックネーム/ログアウトボタンが表示されること
     # - ヘッダーの新規登録/ログインボタンをクリックすることで、各ページに遷移できること
