@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe DeriveryArea, type: :model do
+RSpec.describe DeliveryArea, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

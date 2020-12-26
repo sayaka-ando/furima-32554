@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :derivery_fee do
+  factory :delivery_fee do
     
   end
 end
