@@ -13,11 +13,11 @@ RSpec.describe Item, type: :model do
     end
 
     context '商品投稿がうまく行かない時' do
-      # it '商品画像を1枚つけないと投稿できない' do
-      #   @item.image = nil
-      #   @item.valid?
-      #   binding.pry
-      # end
+      it '商品画像を1枚つけないと投稿できない' do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
 
       it '商品名が無いと投稿できない' do
         @item.product = nil
@@ -79,12 +79,11 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
 
-      # it '販売価格は半角数字でないと登録できない' do
-      #   @item.price = 
-      #   @item.valid?
-      #   binding.pry
-      #   expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
-      # end
+      it '販売価格は半角数字でないと登録できない' do
+        @item.price = '５００'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
     
     end
   end
