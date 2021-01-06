@@ -15,7 +15,7 @@
 ### Association
 
 - has_many :items
-- has_many :buyers
+- has_many :order_informations
 
 
 
@@ -48,13 +48,13 @@
 | address         | string     | null: false                    |
 | building        | string     |                                |
 | phone_number    | string     | null: false                    |
-| buyer           | references | null: false, foreign_key: true |
+|order_information| references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :buyer
+- belongs_to :order_information
 
-## buyers テーブル
+## order_information テーブル
 
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |

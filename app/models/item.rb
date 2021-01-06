@@ -14,7 +14,7 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  has_one :buyers
+  has_one :order_information
   belongs_to :user
 
   extend ActiveHash::Associations::ActiveRecordExtensions
