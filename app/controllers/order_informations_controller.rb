@@ -6,6 +6,7 @@ class OrderInformationsController < ApplicationController
   end
 
   def create
+    binding.pry
     @item = Item.find(params[:item_id])
     @order_form = OrderForm.new(order_information_params)
       if @order_form.valid?
