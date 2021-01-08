@@ -2,7 +2,11 @@ class OrderInformationsController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    if current_user.id == @item.user_id || @item.order_information.present?
+      redirect_to root_path
+    end
     @order_form = OrderForm.new
+    
   end
 
   def create
