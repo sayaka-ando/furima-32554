@@ -10,6 +10,11 @@ RSpec.describe OrderForm, type: :model do
       it '郵便番号、都道府県、市町村、番地、電話番号,tokenがあれば投稿できる' do
         expect(@order_form).to be_valid
       end
+
+      it '建物は空でも投稿できる' do
+        @order_form.building = nil
+        expect(@order_form).to be_valid
+      end
     end
 
     context '商品購入がうまく行かない時' do
@@ -59,6 +64,18 @@ RSpec.describe OrderForm, type: :model do
         @order_form.phone_number = '090111111111'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
+
+      it 'user_idが空のときは購入できない' do
+        @order_form.user_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空のときは購入できない' do
+        @order_form.item_id = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Item can't be blank")
       end
 
       it 'tokenが空のときは購入できない' do
