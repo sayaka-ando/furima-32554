@@ -73,6 +73,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Delivery area can't be blank")
       end
 
+      it '発送元の地域idが0の時登録できない' do
+        @item.delivery_area_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery area must be other than 0")
+      end
+
       it '発送までの日数についての情報が必須であること' do
         @item.delivery_day_id = nil
         @item.valid?
